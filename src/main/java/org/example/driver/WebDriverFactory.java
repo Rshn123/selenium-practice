@@ -9,10 +9,7 @@ public class WebDriverFactory {
     public static WebDriver createDriver(String browser){
         switch (browser.toLowerCase()){
             case "chrome":
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--start-maximized");
-                return new ChromeDriver(chromeOptions);
+                return new ChromeDriver();
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions foxOptions = new FirefoxOptions();

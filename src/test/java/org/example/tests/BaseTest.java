@@ -7,12 +7,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-    WebDriver webDriver;
+    protected WebDriver webDriver;
 
     @BeforeMethod
     public void setUp(){
         String browser = Config.get("browser","chrome");
         webDriver = WebDriverFactory.createDriver(browser);
+        webDriver.manage().window().maximize();
     }
 
     @AfterMethod
