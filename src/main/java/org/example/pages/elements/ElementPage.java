@@ -59,6 +59,7 @@ public class ElementPage extends BasePage {
     }
 
     public void findAndScroll(WebElement element){
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        ((JavascriptExecutor) webDriver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 }

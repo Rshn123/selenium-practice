@@ -43,7 +43,6 @@ public class CheckBoxTest extends BaseTest {
 
         //Click again to unselect.
         checkBoxPage.checkCheckBox("Home");
-
     }
 
     @Test
