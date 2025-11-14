@@ -41,7 +41,8 @@ public class TextBoxTest extends BaseTest {
         textBoxPage.clickSubmitButton();
 
         WebElement emailField = webDriver.findElement(By.id("userEmail"));
-        boolean hasErrorClass = emailField.getDomAttribute("class").contains("field-error");
+        String classAttr = emailField.getDomAttribute("class");
+        boolean hasErrorClass = classAttr!=null && classAttr.contains("field-error");
         Assert.assertTrue(hasErrorClass);
         Thread.sleep(2000);
     }
