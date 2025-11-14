@@ -1,6 +1,7 @@
 package org.example.pages.elements.components;
 
 import org.example.pages.BasePage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +12,7 @@ public class TextBoxPage extends BasePage {
         super(webDriver);
     }
 
-    @FindBy(id = "username")
+    @FindBy(id = "userName")
     private WebElement usernameField;
 
     @FindBy(id = "userEmail")
@@ -53,6 +54,9 @@ public class TextBoxPage extends BasePage {
     }
 
     public void clickSubmitButton(){
+        waitForClickability(submitButton);
+        JavascriptExecutor script = (JavascriptExecutor) webDriver;
+        script.executeScript("arguments[0].scrollIntoView(true);", submitButton);
         submitButton.click();
     }
 }

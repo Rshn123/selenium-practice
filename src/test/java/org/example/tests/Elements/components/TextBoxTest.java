@@ -4,16 +4,46 @@ import org.example.config.Config;
 import org.example.pages.elements.ElementPage;
 import org.example.pages.elements.components.TextBoxPage;
 import org.example.tests.BaseTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TextBoxTest extends BaseTest {
 
-    @Test
-    public void formValidation(){
-        String url = Config.get("base.url","");
-        TextBoxPage textBoxPage = new TextBoxPage(webDriver);
+    TextBoxPage textBoxPage;
+    String url;
+    @BeforeMethod
+    public void startUp(){
+        textBoxPage = new TextBoxPage(webDriver);
+        url = Config.get("base.url","");
         webDriver.get(url+"elements");
         textBoxPage.clickTextBox();
-        textBoxPage.typeUsername("test");
     }
+    @Test
+    public void invalidEmail(){
+        textBoxPage.typeUsername("test");
+        textBoxPage.typeUserEmail("roshan@gmail.com");
+        textBoxPage.typeCurrentAddressField("Current Address");
+        textBoxPage.typePermanentAddressField("Permanent Address");
+        textBoxPage.clickSubmitButton();
+    }
+
+    @Test
+    public void validEmailCheck() throws InterruptedException {
+        textBoxPage.typeUsername("test");
+        textBoxPage.typeUserEmail("com");
+
+        textBoxPage.typeCurrentAddressField("Current Address");
+        textBoxPage.typePermanentAddressField("Permanent Address");
+
+        textBoxPage.clickSubmitButton();
+
+        WebElement emailField = webDriver.findElement(By.id("userEmail"));
+        boolean hasErrorClass = emailField.getDomAttribute("class").contains("field-error");
+        Assert.assertTrue(hasErrorClass);
+        Thread.sleep(2000);
+    }
+
 }
