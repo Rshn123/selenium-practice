@@ -1,9 +1,16 @@
 package org.example.pages.elements.components;
 
+import org.example.pages.BasePage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class TextBoxPage {
+public class TextBoxPage extends BasePage {
+
+    public TextBoxPage(WebDriver webDriver) {
+        super(webDriver);
+    }
+
     @FindBy(id = "username")
     private WebElement usernameField;
 
@@ -19,7 +26,17 @@ public class TextBoxPage {
     @FindBy(id = "submit")
     private WebElement submitButton;
 
+    @FindBy(xpath = "//li[@id='item-0']//span[text()='Text Box']")
+    private WebElement textBoxElement;
+
+
+    public void clickTextBox(){
+        waitForClickability(textBoxElement);
+        textBoxElement.click();
+    }
+
     public void typeUsername(String username){
+        waitForVisibility(usernameField);
         usernameField.sendKeys(username);
     }
 
