@@ -47,5 +47,10 @@ public class CheckBoxPage extends BasePage {
         webDriver.findElement(By.xpath(xpath)).click();
     }
 
+    public boolean isCheckedByTitle(String title){
+        String xpath = String.format("//span[@class='rct-title' and text()='%s']/ancestor::label/input", title);
+        return webDriver.findElement(By.xpath(xpath)).isSelected();
+    }
+
 
 }

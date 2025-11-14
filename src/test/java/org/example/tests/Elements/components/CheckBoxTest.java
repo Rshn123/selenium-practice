@@ -1,14 +1,18 @@
 package org.example.tests.Elements.components;
 
 import org.example.config.Config;
+import org.example.pages.elements.ElementPage;
 import org.example.pages.elements.components.CheckBoxPage;
 import org.example.tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CheckBoxTest extends BaseTest {
     CheckBoxPage checkBoxPage;
     String url;
+    ElementPage elementPage;
+
 
     @BeforeMethod
     private void startUp(){
@@ -16,6 +20,7 @@ public class CheckBoxTest extends BaseTest {
         url = Config.get("base.url","");
         webDriver.get(url+"elements");
         checkBoxPage.clickCheckBox();
+        elementPage = new ElementPage(webDriver);
     }
 
     @Test
@@ -47,7 +52,10 @@ public class CheckBoxTest extends BaseTest {
         checkBoxPage.clickCollapseIcon("Desktop");
         checkBoxPage.checkCheckBox("Desktop");
         checkBoxPage.clickCollapseIcon("Documents");
+        checkBoxPage.checkCheckBox("Documents");
         checkBoxPage.clickCollapseIcon("Downloads");
-        Thread.sleep(2000640);
+        boolean isChecked = checkBoxPage.isCheckedByTitle("Documents");
+        Assert.assertTrue(isChecked);
+        Thread.sleep(20000);
     }
 }

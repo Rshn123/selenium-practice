@@ -13,14 +13,18 @@ import org.testng.annotations.Test;
 public class TextBoxTest extends BaseTest {
 
     TextBoxPage textBoxPage;
+    ElementPage elementPage;
     String url;
+
     @BeforeMethod
     public void startUp(){
         textBoxPage = new TextBoxPage(webDriver);
         url = Config.get("base.url","");
         webDriver.get(url+"elements");
         textBoxPage.clickTextBox();
+        elementPage = new ElementPage(webDriver);
     }
+
     @Test
     public void invalidEmail(){
         textBoxPage.typeUsername("test");
@@ -44,7 +48,7 @@ public class TextBoxTest extends BaseTest {
         String classAttr = emailField.getDomAttribute("class");
         boolean hasErrorClass = classAttr!=null && classAttr.contains("field-error");
         Assert.assertTrue(hasErrorClass);
-        Thread.sleep(2000);
+        Thread.sleep(20000);
     }
 
 }
